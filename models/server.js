@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { dbConnection } = require('../database/config');
 
 class Server{
 //las propiedades se declaran en el constructor
@@ -8,12 +9,20 @@ class Server{
         this.port = process.env.PORT;
         this.usuariosPath = '/api/usuarios';
 
-        //Middlewares
+        //conectar a base de datos
+        this.conectarDB();
+
+
+        //Middlewares es una funcion que se ejecuta antes  que un controlador o seguir con las peticiones
         this.middlewares();
 
 
         //Rutas de mi aplicacion
         this.routes(); // llamar a las rutas
+    }
+
+    async conectarDB(){
+        await dbConnection();
     }
     
     middlewares(){
