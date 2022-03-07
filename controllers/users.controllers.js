@@ -53,7 +53,7 @@ const usuarioPost = async (req, res = response) => { //req (lo que la persona so
     await usuario.save();
 
     res.json({
-        msg: 'put API - contollerpost',
+        
         usuario
         
     })
@@ -84,11 +84,18 @@ const usuarioDelete =  async (req, res = response) => {
      //destructurando el id
      const {id} = req.params;
 
+     //const uid = req.uid;
+
     //borrar fisicamente
     //  const usuario = await Usuario.findByIdAndDelete(id); 
     const usuario = await Usuario.findByIdAndUpdate(id, {estado: false});
+    //
+    
+    //const usuarioAutenticado = req.usuario;
 
-    res.json(usuario)
+    
+
+    res.json({usuario, });
   }  
 
 const usuarioPatch =  (req, res = response) => {

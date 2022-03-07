@@ -36,7 +36,8 @@ const UsuarioSchema = Schema({
 });
 //para sobreescribir
 UsuarioSchema.methods.toJSON = function(){
-  const {__v, password, ...usuario} = this.toObject(); //estoy sacando v y password, todo lo demas se almacena en suario
+  const {__v, password, _id, ...usuario} = this.toObject(); //estoy sacando v y password y _id, todo lo demas se almacena en suario
+  usuario.uid = _id;
   return usuario;
 }
 
