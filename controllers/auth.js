@@ -64,10 +64,10 @@ const googleSingIn = async (req, res = response)=>{
         const data = {
            nombre,
            correo,
-           rol: DefaultTransporter,
+           rol: 'USER_ROLE',
            password: ':s',
            img,
-           gogole: true
+           google: true
         };
 
         usuario = new Usuario(data);
