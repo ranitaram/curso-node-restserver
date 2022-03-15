@@ -64,8 +64,38 @@ const obtenerProducto = async (req, res = response)=>{
     });
 }
 
+//actualizarProducto (solo va a recibir el nombre)
+const actualizarProducto = async (req, res = response)=> {
+    const {id: _id} = req.params;
+   // const categoria =  await Categoria.findById(_id).populate('usuario', 'nombre');
+   const {estado, usuario, ...data} = req.body;
+
+   data.nombre = data.nombre.toUpperCase();
+   data.usuario = req.usuario._id;
+
+   const producto = await Producto.findByIdAndUpdate(_id, data, {new: true});
+
+   res.json({
+       msg: 'todo un exito',
+       producto
+   });
+}
+
+//borrar producto -  que es solo cambiar el estado de el producto
+const borrarProducto = async (req, res = response) =>{
+    const {id: _id} = req.params;
+    // const usuario = await Usuario.findByIdAndUpdate(id, {estado: false});
+    const productoBorrado = await Producto.findOneAndUpdate(_id,{estado: false}, {new:true})//para que se vea reflejada en la respuesta json);
+
+    res.json({
+        msg: 'Borrado',
+       productoBorrado, });
+}
+
 module.exports = {
     crearProducto,
     obtenerProductosGet,
-    obtenerProducto
+    obtenerProducto,
+    actualizarProducto,
+    borrarProducto
 }
