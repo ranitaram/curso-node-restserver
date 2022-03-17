@@ -39,7 +39,7 @@
           
            //console.log('id_token',response.credential);
            const body= {id_token: response.credential};
-           fetch('https://git.heroku.com/rest-server-ramses.git',{
+           fetch('https://rest-server-ramses.herokuapp.com',{
                method: 'POST',
                headers: {
                    'Content-Type':'application/json'
