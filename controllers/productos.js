@@ -6,11 +6,13 @@ const {Producto, Usuario, Categoria} = require('../models')
 const crearProducto = async (req = request, res = response)=>{
    const {estado, usuario, ...body} = req.body;
 
-    const productoDB = await Producto.findOne({nombre: body.nombre});
+   const nombre = body.nombre.toUpperCase();
+
+    const productoDB = await Producto.findOne({nombre});
 
     if (productoDB) {
         return res.status(400).json({
-            msg: `La categoria ${productoDB.nombre}, ya existe`
+            msg: `El producto ${productoDB.nombre}, ya existe`
         });
     }
     //Generar la data a guardar
